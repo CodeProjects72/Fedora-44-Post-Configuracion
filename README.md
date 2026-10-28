@@ -1,4 +1,4 @@
-# Fedora 44 Post-Install
+# Fedora 44 Post-Configuraciòn
 
 Guía de configuración y puesta a punto de Fedora después de una instalación limpia.
 
@@ -39,7 +39,7 @@ sudo dnf update && sudo dnf upgrade -y
 Instalar codecs, reproductores, herramientas de compresión y utilidades multimedia:
 
 ```bash
-sudo dnf install -y xz bzip2 unrar p7zip lbzip2 arj lzma lzop cpio webp-pixbuf-loader java unar file-roller xine-lib-extras xine-lib-extras-freeworld gstreamer1-plugins-base-tools vlc libdvdread libdvdnav lsdvd gstreamer1-vaapi libva-utils ImageMagick
+sudo dnf install -y xz bzip2 unrar p7zip lbzip2 arj lzma lzop cpio webp-pixbuf-loader unar file-roller xine-lib-extras xine-lib-extras-freeworld gstreamer1-plugins-base-tools ffmpeg libdvdread libdvdnav lsdvd gstreamer1-vaapi libva-utils ImageMagick
 ```
 
 ### GStreamer
@@ -53,14 +53,90 @@ sudo dnf install -y gstreamer1-plugins-{bad-*,good-*,base} gstreamer1-plugin-ope
 ### Utilidades
 
 ```bash
-sudo dnf install tilix cmatrix btop htop fastfetch vlc qbittorrent obs-studio ffmpeg kdenlive mousepad eog evince gparted gnome-tweaks -y
+sudo dnf install tilix cmatrix btop htop fastfetch vlc qbittorrent obs-studio kdenlive mousepad eog evince gparted gnome-tweaks mixxx -y
+```
+
+Instalando Extension Manager
+```bash
+sudo dnf copr enable vaniiiiii/extension-manager
+sudo dnf install extension-manager
 ```
 
 ---
 
-## ZSH
+## Códecs Kdenlive
+
+Añadir los repositorios RPM Fusion
+
+```bash
+sudo dnf install https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm
+sudo dnf install https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
+```
+
+Cambiar ffmpeg
+
+```bash
+sudo dnf swap ffmpeg-free ffmpeg --allowerasing
+```
+
+Instalar los códecs extra
+
+```bash
+sudo dnf install x264 x264-libs libavcodec-freeworld
+```
+
+Comprobar
+
+  - Cierra y abre Kdenlive (si no reconoce los códecs, reinicia la sesión).
+  - Importa un MP4.
+  - Exporta con el perfil MP4 - H264/AAC.
+
+
+## Activar Flatpak
+
+```bash
+flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
+```
+
+---
+
+## VirtualBox
+
+### Repositorio de Oracle
+
+Descargar el repositorio:
+
+```bash
+sudo wget https://download.virtualbox.org/virtualbox/rpm/fedora/virtualbox.repo -P /etc/yum.repos.d/
+```
+
+### Dependencias
+
+Instalar las dependencias necesarias:
+
+```bash
+sudo dnf install -y kernel-devel kernel-headers dkms elfutils-libelf-devel make gcc
+```
 
 ### Instalación
+
+Instalar VirtualBox:
+
+```bash
+sudo dnf install -y VirtualBox-7.2
+```
+
+### Grupo `vboxusers`
+
+Añadir el usuario actual al grupo:
+
+```bash
+sudo usermod -aG vboxusers $USER
+```
+
+---
+
+## ZSH Terminal
 
 Instalar ZSH y las dependencias necesarias:
 
@@ -152,6 +228,12 @@ Instalar los cursores:
 sudo dnf install -y bibata-cursor-themes
 ```
 
+Instalar Iconos Papirus
+
+```bash
+sudo dnf install -y papirus-icon-theme
+```
+
 ### Layan GTK Theme
 
 Instalar las dependencias:
@@ -178,45 +260,7 @@ Ejecutar el instalador:
 ./install.sh
 ```
 
----
-
-## 09 · VirtualBox
-
-### Repositorio de Oracle
-
-Descargar el repositorio:
-
-```bash
-sudo wget https://download.virtualbox.org/virtualbox/rpm/fedora/virtualbox.repo -P /etc/yum.repos.d/
-```
-
-### Dependencias
-
-Instalar las dependencias necesarias:
-
-```bash
-sudo dnf install -y kernel-devel kernel-headers dkms elfutils-libelf-devel make gcc
-```
-
-### Instalación
-
-Instalar VirtualBox:
-
-```bash
-sudo dnf install -y VirtualBox-7.2
-```
-
-### Grupo `vboxusers`
-
-Añadir el usuario actual al grupo:
-
-```bash
-sudo usermod -aG vboxusers $USER
-```
-
----
-
-## 10 · Reinicio
+## Reinicio
 
 Reiniciar el sistema para aplicar los cambios:
 
