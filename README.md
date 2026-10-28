@@ -4,9 +4,7 @@ Guía de configuración y puesta a punto de Fedora después de una instalación 
 
 ---
 
-## Optimización de DNF
-
-### Configuración inicial
+## Configuración
 
 Editar la configuración de DNF:
 
@@ -57,6 +55,7 @@ sudo dnf install tilix cmatrix btop htop fastfetch vlc qbittorrent obs-studio kd
 ```
 
 Instalando Extension Manager
+
 ```bash
 sudo dnf copr enable vaniiiiii/extension-manager
 sudo dnf install extension-manager
@@ -102,7 +101,7 @@ flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.f
 
 ## VirtualBox
 
-### Repositorio de Oracle
+Repositorio de Oracle
 
 Descargar el repositorio:
 
@@ -144,7 +143,7 @@ Instalar ZSH y las dependencias necesarias:
 sudo dnf install -y git zsh util-linux-user
 ```
 
-### Oh My Zsh
+Oh My Zsh
 
 Clonar el repositorio:
 
@@ -164,7 +163,7 @@ Crear una copia de seguridad:
 cp ~/.zshrc ~/.zshrc.orig
 ```
 
-### Shell predeterminado
+Shell predeterminado
 
 Cambiar el shell del usuario a ZSH:
 
@@ -178,15 +177,13 @@ Cerrar y volver a abrir la terminal.
 
 ## Powerlevel10k
 
-### Instalación
-
 Clonar Powerlevel10k:
 
 ```bash
 git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ~/.oh-my-zsh/custom/themes/powerlevel10k
 ```
 
-### Configuración
+Configuración
 
 Añadir Powerlevel10k a `.zshrc`:
 
@@ -214,7 +211,7 @@ La configuración de `root` es independiente de la configuración del usuario no
 
 ## Temas e iconos
 
-### Bibata Cursor
+Bibata Cursor
 
 Habilitar el repositorio:
 
@@ -234,7 +231,7 @@ Instalar Iconos Papirus
 sudo dnf install -y papirus-icon-theme
 ```
 
-### Layan GTK Theme
+Layan GTK Theme
 
 Instalar las dependencias:
 
